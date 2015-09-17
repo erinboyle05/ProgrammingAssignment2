@@ -2,39 +2,39 @@
 ## to a cache and call the values of the cache
 
 ## makeCacheMatrix() stores four functions:
-## set() sets m=NULL and substitutes y from input for x of main function
+## set() sets mat = NULL and substitutes y from input for x of main function
 ## get() returns vector x
-## setinverse() sets m as inverse of matrix x
-## getinverse() returns m
+## setinverse() sets mat as inverse of matrix x
+## getinverse() returns mat
 
 makeCacheMatrix <- function(x = matrix()) {
-        m <- NULL
+        mat <- NULL
         set <- function(y) {
                 x <<- y
-                m <<- NULL
+                mat <<- NULL
         }
         get <- function() x
-        setinverse <- function(solve) m <<- solve
-        getinverse <- function() m
+        setinverse <- function(solve) mat <<- solve
+        getinverse <- function() mat
         list(set=set, get=get, setinverse=setinverse,
              getinverse=getinverse)
 }
 
 
-## cacheSolve() checks m for a value and returns m if not equal to NULL
-## if m=NULL, data is stored to makeCacheMatrix and calculates and 
+## cacheSolve() checks mat for a value and returns mat if not equal to NULL
+## if mat = NULL, data is stored to makeCacheMatrix and calculates and 
 ## returns inverse of matrix
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
-        m <- x$getinverse()
-        if(!is.null(m)) {
+        mat <- x$getinverse()
+        if(!is.null(mat)) {
                 message("getting cached data")
-                return(m)
+                return(mat)
         }
         data <- x$get()
-        m <- solve(data, ...)
-        x$setinverse(m)
-        m
+        mat <- solve(data, ...)
+        x$setinverse(mat)
+        mat
         
 }
